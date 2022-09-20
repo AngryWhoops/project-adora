@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -13,31 +12,39 @@ class Post extends Model
 {
     use HasFactory;
 
+    public $timestamps = true;
+    public $table = 'posts';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'header',
+        'text'
+    ];
+
     /**
-     * Пользователь, автор поста
-     * @return BelongsTo
+     * Пользователи, авторы постов
+     * @return BelongsToMany
      */
-    public function user(): BelongsTo
+    public function users(): BelongsToMany
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     /**
      *Коментарии у поста
-     * @return BelongsToMany
+     * @return HasMany
      */
-    public function comments(): BelongsToMany
+    public function comments(): HasMany
     {
-        return $this->belongsToMany(Comment::class);
+        return $this->hasMany(Comment::class);
     }
 
     /**
      * Хештеги постов
-     * @return BelongsToMany
+     * @return HasMany
      */
-    public function hashtags(): BelongsToMany
+    public function hashtags(): HasMany
     {
-        return $this->belongsToMany(Hashtag::class);
+        return $this->hasMany(Hashtag::class);
     }
 
     /**

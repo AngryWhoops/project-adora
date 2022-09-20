@@ -10,6 +10,14 @@ class Hashtag extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    public $table = 'hashtags';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'name'
+    ];
+
+
     /**
      *Посты хештега, многие ко многим
      * @return BelongsToMany

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,18 +14,18 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id()->comment('Id поста, первичный ключ');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
-            $table->string('header')
-                ->default(null)
-                ->comment('Заголовок поста');
-            $table->string('text')
-                ->default(null)
-                ->comment('Текст внутри поста');
+            $table->text('text')
+                ->comment("Текст комментария");
             $table->foreignIdFor(User::class, 'user_id')
                 ->index()
-                ->comment('Id автора поста');
+                ->comment('ID автора коментария');
+            $table->foreignIdFor(Post::class, 'post_id')
+                ->default(null)
+                ->index()
+                ->comment('Id поста, которому принадлежит коментарий');
         });
     }
 
@@ -35,6 +36,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('comments');
     }
 };

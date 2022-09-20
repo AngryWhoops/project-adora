@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HashtagPost extends Model
+class PostUser extends Model
 {
     use HasFactory;
 
+    public $incrementing = true;
     public $timestamps = false;
-    public $table = 'hashtag_post';
+    public $table = 'post_user';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'hashtag_id',
-        'post_id'
+        'post_id',
+        'user_id',
     ];
 }

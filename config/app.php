@@ -1,5 +1,9 @@
 <?php
 
+use App\Providers\CommentServiceProvider;
+use App\Providers\HashtagServiceProvider;
+use App\Providers\PostServiceProvider;
+use App\Providers\UserServiceProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -41,7 +45,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -181,6 +185,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        //Мои провайдеры
+        CommentServiceProvider::class,
+        HashtagServiceProvider::class,
+        PostServiceProvider::class,
+        UserServiceProvider::class,
+
 
         /*
          * Package Service Providers...
